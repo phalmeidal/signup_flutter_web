@@ -179,6 +179,11 @@ class StepOnePage extends StatelessWidget {
                           onPressed: () {
                             Get.to(const StepTwoPage());
                           }),
+                      ElevatedButton(
+                          onPressed: () {
+                            Get.to(StepTwoPage());
+                          },
+                          child: Text('Next')),
                     ],
                   );
                 },
