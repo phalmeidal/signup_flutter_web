@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sign_up_page/views/step_one.dart';
+import 'package:sign_up_page/app/views/signup_page.dart';
+import 'package:sign_up_page/app/views/step_one.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: StepOnePage(),
+      home: SignupPage(),
     );
   }
 }

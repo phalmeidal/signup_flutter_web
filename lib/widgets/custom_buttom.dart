@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String customName;
-  final Icon customIcon;
+  final IconData customIcon;
   final Function onPressed;
-  final Color backgroundColor;
-  final double borderRadius;
+  final bool isEnabled;
 
   const CustomButton({
     super.key,
     required this.customName,
     required this.customIcon,
     required this.onPressed,
-    this.backgroundColor = const Color.fromARGB(255, 12, 101, 173),
-    this.borderRadius = 20.0,
+    this.isEnabled = true,
   });
 
   @override
@@ -23,22 +21,30 @@ class CustomButton extends StatelessWidget {
       height: 40,
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) return Colors.grey;
+              return const Color.fromARGB(255, 12, 101, 173);
+            },
+          ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
         ),
-        onPressed: () {
-          onPressed;
-        },
+        onPressed: isEnabled ? () => onPressed() : null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(customName, style: const TextStyle(color: Colors.white)),
+            Text(customName, style: TextStyle(color: isEnabled ? Colors.white : const Color.fromARGB(255, 56, 56, 56))),
             const SizedBox(width: 10),
-            customIcon,
+            Icon(
+              customIcon,
+              color: isEnabled ? Colors.white : const Color.fromARGB(255, 56, 56, 56),
+              size: 20,
+              weight: 1,
+            ),
           ],
         ),
       ),

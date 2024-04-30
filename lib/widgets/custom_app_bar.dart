@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             TextButton(
               style: TextButton.styleFrom(
-                primary: const Color.fromARGB(255, 18, 80, 131),
+                foregroundColor: const Color.fromARGB(255, 18, 80, 131),
               ),
               onPressed: onBack,
               child: const Row(
@@ -31,7 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                primary: const Color.fromARGB(255, 187, 21, 16),
+                foregroundColor: const Color.fromARGB(255, 187, 21, 16),
               ),
               onPressed: onCancel,
               child: const Row(
