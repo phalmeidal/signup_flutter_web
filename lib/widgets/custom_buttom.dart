@@ -32,12 +32,16 @@ class CustomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           ),
+          elevation: MaterialStateProperty.all<double>(0),
         ),
         onPressed: isEnabled ? () => onPressed() : null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(customName, style: TextStyle(color: isEnabled ? Colors.white : const Color.fromARGB(255, 56, 56, 56))),
+            Text(
+              customName,
+              style: TextStyle(color: isEnabled ? Colors.white : const Color.fromARGB(255, 56, 56, 56), fontWeight: FontWeight.bold, fontSize: 13),
+            ),
             const SizedBox(width: 10),
             Icon(
               customIcon,

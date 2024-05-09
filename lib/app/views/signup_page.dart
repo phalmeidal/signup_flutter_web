@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:sign_up_page/app/controllers/signup_controller.dart';
 import 'package:sign_up_page/app/views/step_four/step_four.dart';
@@ -17,101 +16,55 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          onBack: () => controller.previousStep(),
-          onCancel: () => Get.back(),
-        ),
-        backgroundColor: Color(const Color.fromARGB(255, 245, 245, 245).value),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: LayoutBuilder(builder: (context, constraints) {
-              bool enableScroll = constraints.maxHeight < 600;
-              return enableScroll
-                  ? SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                            maxHeight: MediaQuery.of(context).size.height),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: 60,
-                              child: const Text(
-                                'Cadastro nova empresa',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Obx(() {
-                              return SignupProgress(
-                                currentStep: controller.currentStep.value + 1,
-                              );
-                            }),
-                            Flexible(
-                              child: Obx(() {
-                                switch (controller.currentStep.value) {
-                                  case 0:
-                                    return StepOnePage();
-                                  case 1:
-                                    return StepTwoPage();
-                                  case 2:
-                                    return StepThreePage();
-                                  case 3:
-                                    return StepFourPage();
-                                  default:
-                                    return StepOnePage();
-                                }
-                              }),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: 60,
-                            child: const Text(
-                              'Cadastro nova empresa',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Obx(() {
-                            return SignupProgress(
-                              currentStep: controller.currentStep.value + 1,
-                            );
-                          }),
-                          Flexible(
-                            child: Obx(() {
-                              switch (controller.currentStep.value) {
-                                case 0:
-                                  return StepOnePage();
-                                case 1:
-                                  return StepTwoPage();
-                                case 2:
-                                  return StepThreePage();
-                                case 3:
-                                  return StepFourPage();
-                                default:
-                                  return StepOnePage();
-                              }
-                            }),
-                          ),
-                        ],
-                      ),
-                    );
-            }),
-          ),
-        ));
+      appBar: CustomAppBar(
+        onBack: () => controller.previousStep(),
+        onCancel: () => Get.back(),
+      ),
+      backgroundColor: Color(const Color.fromARGB(255, 245, 245, 245).value),
+      body: Center(
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Column(
+            children: [
+              const SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: const Text(
+                  'Cadastro nova empresa',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Obx(() {
+                return SignupProgress(
+                  currentStep: controller.currentStep.value + 1,
+                );
+              }),
+              const SizedBox(height: 10),
+              Flexible(child: _buildStepPage()),
+            ],
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildStepPage() {
+    return Obx(() {
+      final stepPages = {
+        0: StepOnePage(),
+        1: StepTwoPage(),
+        2: StepThreePage(),
+        3: StepFourPage(),
+      };
+
+      return stepPages[controller.currentStep.value] ?? StepOnePage();
+    });
   }
 }

@@ -7,15 +7,13 @@ class SignupProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       return Container(
         width: constraints.maxWidth * 0.7,
         height: 90,
         decoration: BoxDecoration(
           color: Colors.white,
-          border:
-              Border.all(color: const Color.fromARGB(75, 0, 0, 0), width: 0.5),
+          border: Border.all(color: const Color.fromARGB(75, 0, 0, 0), width: 0.5),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -32,8 +30,7 @@ class SignupProgress extends StatelessWidget {
             _buildDivider(context),
             Padding(
               padding: const EdgeInsets.only(right: 40.0),
-              child: _buildStep(
-                  4, "Dados do usuário master", currentStep, context),
+              child: _buildStep(4, "Dados do usuário master", currentStep, context),
             ),
           ],
         ),
@@ -41,8 +38,7 @@ class SignupProgress extends StatelessWidget {
     });
   }
 
-  Widget _buildStep(
-      int stepNumber, String stepName, int currentStep, BuildContext context) {
+  Widget _buildStep(int stepNumber, String stepName, int currentStep, BuildContext context) {
     final isActive = stepNumber == currentStep;
     final isCompleted = stepNumber < currentStep;
     final screenWidth = MediaQuery.of(context).size.width;
@@ -69,9 +65,7 @@ class SignupProgress extends StatelessWidget {
                       : Text(
                           stepNumber.toString(),
                           style: TextStyle(
-                            color: isActive
-                                ? const Color.fromARGB(255, 18, 80, 131)
-                                : const Color.fromARGB(255, 158, 158, 158),
+                            color: isActive ? const Color.fromARGB(255, 18, 80, 131) : const Color.fromARGB(255, 158, 158, 158),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -80,9 +74,7 @@ class SignupProgress extends StatelessWidget {
               Text(
                 stepName,
                 style: TextStyle(
-                  color: isActive || isCompleted
-                      ? Colors.black
-                      : const Color.fromARGB(255, 158, 158, 158),
+                  color: isActive || isCompleted ? Colors.black : const Color.fromARGB(255, 158, 158, 158),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -109,9 +101,7 @@ class SignupProgress extends StatelessWidget {
                       : Text(
                           stepNumber.toString(),
                           style: TextStyle(
-                            color: isActive
-                                ? const Color.fromARGB(255, 18, 80, 131)
-                                : const Color.fromARGB(255, 158, 158, 158),
+                            color: isActive ? const Color.fromARGB(255, 18, 80, 131) : const Color.fromARGB(255, 158, 158, 158),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -120,9 +110,7 @@ class SignupProgress extends StatelessWidget {
               Text(
                 stepName,
                 style: TextStyle(
-                  color: isActive || isCompleted
-                      ? Colors.black
-                      : const Color.fromARGB(255, 158, 158, 158),
+                  color: isActive || isCompleted ? Colors.black : const Color.fromARGB(255, 158, 158, 158),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -135,8 +123,7 @@ class SignupProgress extends StatelessWidget {
     double dividerWidth;
 
     if (screenWidth < 1366) {
-      return const SizedBox
-          .shrink(); // Retorna um widget vazio se a largura da tela for menor que 1366
+      return const SizedBox.shrink(); // Retorna um widget vazio se a largura da tela for menor que 1366
     }
 
     if (screenWidth <= 1506) {

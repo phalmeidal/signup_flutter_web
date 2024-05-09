@@ -13,140 +13,122 @@ class StepOnePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(const Color.fromARGB(255, 245, 245, 245).value),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 25),
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  return Column(
-                    children: [
-                      Card(
-                        surfaceTintColor: Colors.white,
-                        shape: RoundedRectangleBorder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return Column(
+                  children: [
+                    Card(
+                      surfaceTintColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: const Color.fromARGB(75, 0, 0, 0),
+                            width: 0.5,
+                          ),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color.fromARGB(75, 0, 0, 0),
-                              width: 0.5,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          width: constraints.maxWidth * 0.7,
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Form(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Dados da empresa',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                        width: constraints.maxWidth * 0.7,
+                        child: const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Form(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                  'Dados da empresa',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Divider(color: Color.fromARGB(75, 0, 0, 0), indent: 10),
+                                SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomTextFormField(
+                                            fieldName: 'CNPJ',
+                                            optionalText: 'Digite apenas numeros',
+                                            placeholder: 'Digite seu CNPJ',
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Divider(
-                                      color: Color.fromARGB(75, 0, 0, 0),
-                                      indent: 10),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomTextFormField(
-                                              fieldName: 'CNPJ',
-                                              optionalText:
-                                                  'Digite apenas numeros',
-                                              placeholder: 'Digite seu CNPJ',
-                                            ),
-                                          ],
-                                        ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomTextFormField(
+                                            fieldName: 'Razão social',
+                                            placeholder: 'Digite a razão social',
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(width: 10),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomTextFormField(
-                                              fieldName: 'Razão social',
-                                              placeholder:
-                                                  'Digite a razão social',
-                                            ),
-                                          ],
-                                        ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomTextFormField(fieldName: 'Nome fantasia', optionalText: 'Se não possuir, repetir a razão social. Abrevie se necessário.', placeholder: 'Digite o nome fantasia'),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 3,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomTextFormField(
-                                                fieldName: 'Nome fantasia',
-                                                optionalText:
-                                                    'Se não possuir, repetir a razão social. Abrevie se necessário.',
-                                                placeholder:
-                                                    'Digite o nome fantasia'),
-                                          ],
-                                        ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomTextFormField(
+                                            fieldName: 'Atividade principal',
+                                            optionalText: 'Digite apenas números',
+                                            placeholder: 'Digite a atividade principal',
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(width: 10),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomTextFormField(
-                                              fieldName: 'Atividade principal',
-                                              optionalText:
-                                                  'Digite apenas números',
-                                              placeholder:
-                                                  'Digite a atividade principal',
-                                            ),
-                                          ],
-                                        ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomTextFormField(fieldName: 'Código externo', placeholder: 'Digite o código externo'),
+                                        ],
                                       ),
-                                      SizedBox(width: 10),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomTextFormField(
-                                                fieldName: 'Código externo',
-                                                placeholder:
-                                                    'Digite o código externo'),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      CustomButton(
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.only(right: constraints.maxWidth * 0.15),
+                      child: CustomButton(
                         customName: 'Próximo',
                         customIcon: Icons.arrow_forward_rounded,
                         onPressed: () {
@@ -154,12 +136,15 @@ class StepOnePage extends StatelessWidget {
                         },
                         isEnabled: true,
                       ),
-                    ],
-                  );
-                },
-              ),
-            ],
-          ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
