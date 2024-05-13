@@ -19,21 +19,30 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 11.5),
-          child: Text(fieldName, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+          child: Text(fieldName,
+              style:
+                  const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
         ),
         Theme(
           data: ThemeData(
             primaryColor: const Color.fromARGB(255, 12, 101, 173),
-            colorScheme: const ColorScheme.light(primary: Color.fromARGB(255, 12, 101, 173)),
+            textSelectionTheme: const TextSelectionThemeData(
+                selectionColor: Color.fromARGB(80, 12, 100, 173)),
+            colorScheme: const ColorScheme.light(
+                primary: Color.fromARGB(255, 12, 101, 173)),
           ),
           child: SizedBox(
             height: 45,
             child: TextFormField(
+              cursorColor: const Color.fromARGB(255, 12, 101, 173),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color.fromARGB(120, 238, 238, 238),
                 hintText: placeholder,
-                hintStyle: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w400),
+                hintStyle: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w400),
                 enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color.fromARGB(75, 0, 0, 0),
@@ -41,7 +50,8 @@ class CustomTextFormField extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Color.fromARGB(75, 0, 0, 0), width: 0.5),
+                  borderSide: BorderSide(
+                      color: Color.fromARGB(75, 0, 0, 0), width: 0.5),
                 ),
               ),
               validator: (value) {
@@ -57,7 +67,8 @@ class CustomTextFormField extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 10.0, left: 11.5),
           child: Text(
             optionalText ?? '',
-            style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.w400),
+            style: const TextStyle(
+                fontSize: 11, color: Colors.grey, fontWeight: FontWeight.w400),
           ),
         ),
       ],

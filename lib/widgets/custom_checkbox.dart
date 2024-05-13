@@ -29,6 +29,11 @@ class CustomCheckboxState extends State<CustomCheckbox> {
             hoverColor: Colors.transparent,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             activeColor: const Color.fromARGB(255, 12, 101, 173),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                return Colors.transparent;
+              },
+            ),
             onChanged: (value) {
               toggleCheckbox();
             },

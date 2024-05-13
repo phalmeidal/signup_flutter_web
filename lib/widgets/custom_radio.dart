@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomRadio extends StatefulWidget {
   final String title, description, radioTitle1, radioTitle2;
-
   final String? radioDescription1, radioDescription2;
+
   const CustomRadio({
     super.key,
     required this.title,
@@ -15,158 +15,126 @@ class CustomRadio extends StatefulWidget {
   });
 
   @override
-  CustomRadioState createState() => CustomRadioState();
+  _CustomRadioState createState() => _CustomRadioState();
 }
 
-class CustomRadioState extends State<CustomRadio> {
-  late int selectedRadio;
+class _CustomRadioState extends State<CustomRadio> {
+  int _selectedRadio = 0;
 
-  CustomRadioState() {
-    selectedRadio = 0;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    selectedRadio = 0;
-  }
-
-  setSelectedRadio(int val) {
+  void _setSelectedRadio(int val) {
     setState(() {
-      selectedRadio = val;
+      _selectedRadio = val;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 8.0,
-        bottom: 8.0,
-      ),
+      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            widget.description,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 190, 190, 190),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setSelectedRadio(1);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: selectedRadio == 1 ? Colors.blue : Colors.grey,
-                        width: selectedRadio == 1 ? 1.0 : 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 1,
-                                  activeColor: Colors.blue,
-                                  groupValue: selectedRadio,
-                                  onChanged: (val) {
-                                    setSelectedRadio(val!);
-                                  },
-                                ),
-                                Text(
-                                  widget.radioTitle1,
-                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            if (widget.radioDescription1 != null)
-                              Padding(
-                                padding: const EdgeInsets.only(left: 32.0),
-                                child: Text(
-                                  widget.radioDescription1!,
-                                  style: const TextStyle(fontSize: 14, color: Color.fromARGB(255, 190, 190, 190)),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setSelectedRadio(2);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: selectedRadio == 2 ? Colors.blue : Colors.grey,
-                        width: selectedRadio == 2 ? 1.0 : 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Radio(
-                                  value: 2,
-                                  activeColor: Colors.blue,
-                                  hoverColor: Colors.transparent,
-                                  groupValue: selectedRadio,
-                                  onChanged: (val) {
-                                    setSelectedRadio(val!);
-                                  },
-                                ),
-                                Text(
-                                  widget.radioTitle2,
-                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            if (widget.radioDescription2 != null)
-                              Padding(
-                                padding: const EdgeInsets.only(left: 32.0),
-                                child: Text(
-                                  widget.radioDescription2!,
-                                  style: const TextStyle(fontSize: 14, color: Color.fromARGB(255, 190, 190, 190)),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _buildTitle(),
+          _buildDescription(),
+          _buildRadioButtons(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return Text(
+      widget.title,
+      style: const TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _buildDescription() {
+    return Text(
+      widget.description,
+      style: const TextStyle(color: Color.fromARGB(255, 190, 190, 190)),
+    );
+  }
+
+  Widget _buildRadioButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: _buildRadioButton(
+            title: widget.radioTitle1,
+            description: widget.radioDescription1,
+            value: 1,
+          ),
+        ),
+        const SizedBox(width: 20),
+        Expanded(
+          child: _buildRadioButton(
+            title: widget.radioTitle2,
+            description: widget.radioDescription2,
+            value: 2,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRadioButton({
+    required String title,
+    required String? description,
+    required int value,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        _setSelectedRadio(value);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: _selectedRadio == value ? Colors.blue : Colors.grey,
+            width: _selectedRadio == value ? 1.0 : 0.5,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Radio(
+                        value: value,
+                        activeColor: Colors.blue,
+                        overlayColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        groupValue: _selectedRadio,
+                        onChanged: (val) {
+                          _setSelectedRadio(val!);
+                        },
+                      ),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  if (description != null)
+                    Text(
+                      description,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Color.fromARGB(255, 190, 190, 190),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

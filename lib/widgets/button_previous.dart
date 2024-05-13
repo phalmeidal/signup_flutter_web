@@ -12,6 +12,9 @@ class PreviousButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all<Color>(
+          Colors.white,
+        ),
         backgroundColor: MaterialStateProperty.all<Color>(
           Colors.white,
         ),
@@ -26,7 +29,10 @@ class PreviousButton extends StatelessWidget {
       onPressed: () => onPressed(),
       child: const Text(
         'Anterior',
-        style: TextStyle(color: Color.fromARGB(255, 12, 101, 173), fontWeight: FontWeight.bold, fontSize: 13),
+        style: TextStyle(
+            color: Color.fromARGB(255, 12, 101, 173),
+            fontWeight: FontWeight.bold,
+            fontSize: 13),
       ),
     );
   }

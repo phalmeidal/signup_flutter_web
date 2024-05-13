@@ -43,6 +43,11 @@ class _GenderRadioState extends State<GenderRadio> {
               });
             },
             activeColor: Colors.blue,
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                return Colors.transparent;
+              },
+            ),
             hoverColor: Colors.transparent,
           ),
         ),
