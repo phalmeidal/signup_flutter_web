@@ -35,7 +35,9 @@ class _CustomRadioState extends State<CustomRadio> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTitle(),
+          const SizedBox(height: 5),
           _buildDescription(),
+          const SizedBox(height: 10),
           _buildRadioButtons(),
         ],
       ),
@@ -95,7 +97,7 @@ class _CustomRadioState extends State<CustomRadio> {
             color: _selectedRadio == value ? Colors.blue : Colors.grey,
             width: _selectedRadio == value ? 1.0 : 0.5,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
         ),
         child: Row(
           children: [
@@ -108,8 +110,7 @@ class _CustomRadioState extends State<CustomRadio> {
                       Radio(
                         value: value,
                         activeColor: Colors.blue,
-                        overlayColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
+                        overlayColor: MaterialStateProperty.all<Color>(Colors.white),
                         groupValue: _selectedRadio,
                         onChanged: (val) {
                           _setSelectedRadio(val!);
@@ -117,8 +118,7 @@ class _CustomRadioState extends State<CustomRadio> {
                       ),
                       Text(
                         title,
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

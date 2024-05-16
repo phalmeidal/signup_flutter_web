@@ -29,11 +29,14 @@ class CustomDropdown extends StatelessWidget {
               hintText: placeholder,
               hintStyle: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w400),
               enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(75, 0, 0, 0),
-                    width: 0.5,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                borderSide: BorderSide(
+                  color: Color.fromARGB(75, 0, 0, 0),
+                  width: 0.5,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color.fromARGB(75, 0, 0, 0), width: 0.5),
               ),
@@ -54,7 +57,9 @@ class CustomDropdown extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+          padding: const EdgeInsets.only(
+            top: 10.0,
+          ),
           child: Text(
             optionalText ?? '',
             style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.w400),

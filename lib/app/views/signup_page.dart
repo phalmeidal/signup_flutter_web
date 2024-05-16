@@ -20,14 +20,13 @@ class SignupPage extends StatelessWidget {
         onBack: () => controller.previousStep(),
         onCancel: () => Get.back(),
       ),
-      backgroundColor: Color(const Color.fromARGB(255, 245, 245, 245).value),
-      body: Center(
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Column(
+      backgroundColor: const Color(0xFFF5F5F5),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: const Text(
@@ -38,24 +37,29 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               Obx(() {
                 return SignupProgress(
                   currentStep: controller.currentStep.value + 1,
                 );
               }),
               const SizedBox(height: 10),
-              Flexible(child: _buildStepPage()),
+              Obx(() {
+                return ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: controller.currentStep.value < 2 ? MediaQuery.of(context).size.height * 0.5 : MediaQuery.of(context).size.height * 2.5,
+                  ),
+                  child: _buildStepPage(context),
+                );
+              })
             ],
-          );
-        }),
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildStepPage() {
+  Widget _buildStepPage(context) {
     return Obx(() {
       final stepPages = {
         0: StepOnePage(),
@@ -64,7 +68,10 @@ class SignupPage extends StatelessWidget {
         3: StepFourPage(),
       };
 
-      return stepPages[controller.currentStep.value] ?? StepOnePage();
+      return IndexedStack(
+        index: controller.currentStep.value,
+        children: stepPages.values.toList(),
+      );
     });
   }
 }

@@ -1,29 +1,64 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:sign_up_page/app/controllers/signup_controller.dart';
 
 class StepOneController extends GetxController {
-  RxString cnpj = ''.obs;
-  RxString razaoSocial = ''.obs;
-  RxString nomeFantasia = ''.obs;
-  RxString atividadePrincipal = ''.obs;
-  RxString codigoExterno = ''.obs;
+  final SignupController _signupController = Get.find();
 
-  void updateCNPJ(String value) {
-    cnpj.value = value;
+  final cnpjController = TextEditingController();
+  final razaoSocialController = TextEditingController();
+  final nomeFantasiaController = TextEditingController();
+  final atividadePrincipalController = TextEditingController();
+  final codigoExternoController = TextEditingController();
+
+  var cnpj = ''.obs;
+  var razaoSocial = ''.obs;
+  var nomeFantasia = ''.obs;
+  var atividadePrincipal = ''.obs;
+  var codigoExterno = ''.obs;
+
+  var isButtonEnabled = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    cnpjController.addListener(_validateFields);
+    razaoSocialController.addListener(_validateFields);
+    nomeFantasiaController.addListener(_validateFields);
+    atividadePrincipalController.addListener(_validateFields);
+    codigoExternoController.addListener(_validateFields);
   }
 
-  void updateRazaoSocial(String value) {
-    razaoSocial.value = value;
+  void _validateFields() {
+    cnpj.value = cnpjController.text;
+    razaoSocial.value = razaoSocialController.text;
+    nomeFantasia.value = nomeFantasiaController.text;
+    atividadePrincipal.value = atividadePrincipalController.text;
+    codigoExterno.value = codigoExternoController.text;
+
+    isButtonEnabled.value = cnpj.isNotEmpty && razaoSocial.isNotEmpty && nomeFantasia.isNotEmpty && atividadePrincipal.isNotEmpty && codigoExterno.isNotEmpty;
   }
 
-  void updateNomeFantasia(String value) {
-    nomeFantasia.value = value;
+  void nextStep() {
+    if (isButtonEnabled.value) {
+      _signupController.nextStep();
+    } else {
+      Get.snackbar(
+        'Erro',
+        'Todos os campos são obrigatórios.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 
-  void updateAtividadePrincipal(String value) {
-    atividadePrincipal.value = value;
-  }
-
-  void updateCodigoExterno(String value) {
-    codigoExterno.value = value;
+  @override
+  void onClose() {
+    cnpjController.dispose();
+    razaoSocialController.dispose();
+    nomeFantasiaController.dispose();
+    atividadePrincipalController.dispose();
+    codigoExternoController.dispose();
+    super.onClose();
   }
 }
