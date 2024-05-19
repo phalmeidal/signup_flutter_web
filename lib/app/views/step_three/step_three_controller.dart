@@ -37,7 +37,13 @@ class StepThreeController extends GetxController {
     bairro.value = bairroController.text;
     complemento.value = complementoController.text;
 
-    isNextButtonEnabled.value = cep.isNotEmpty && logradouro.isNotEmpty && numero.isNotEmpty && bairro.isNotEmpty && complemento.isNotEmpty;
+    isNextButtonEnabled.value = cep.isNotEmpty &&
+        logradouro.isNotEmpty &&
+        numero.isNotEmpty &&
+        bairro.isNotEmpty &&
+        complemento.isNotEmpty;
+    Get.find<SignupController>()
+        .isNextButtonStepThreeEnabled(isNextButtonEnabled.value);
   }
 
   void nextStep() {

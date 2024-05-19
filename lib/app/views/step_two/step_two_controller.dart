@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_up_page/app/controllers/signup_controller.dart';
 
 class StepTwoController extends GetxController {
   final TextEditingController emailController = TextEditingController();
@@ -25,6 +26,8 @@ class StepTwoController extends GetxController {
 
   void validateEmails() {
     isNextButtonEnabled.value = emails.isNotEmpty;
+    Get.find<SignupController>()
+        .isNextButtonStepTwoEnabled(isNextButtonEnabled.value);
   }
 
   @override

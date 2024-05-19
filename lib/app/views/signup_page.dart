@@ -6,6 +6,7 @@ import 'package:sign_up_page/app/views/step_one/step_one.dart';
 import 'package:sign_up_page/app/views/step_three/step_three.dart';
 import 'package:sign_up_page/app/views/step_two/step_two.dart';
 import 'package:sign_up_page/widgets/custom_app_bar.dart';
+import 'package:sign_up_page/widgets/navigation_buttons.dart';
 import 'package:sign_up_page/widgets/signup_progress.dart';
 
 class SignupPage extends StatelessWidget {
@@ -44,14 +45,16 @@ class SignupPage extends StatelessWidget {
                 );
               }),
               const SizedBox(height: 10),
-              Obx(() {
-                return ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: controller.currentStep.value < 2 ? MediaQuery.of(context).size.height * 0.5 : MediaQuery.of(context).size.height * 2.5,
+              Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height,
+                    child: _buildStepPage(context),
                   ),
-                  child: _buildStepPage(context),
-                );
-              })
+                  const NavigationButtons(),
+                ],
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

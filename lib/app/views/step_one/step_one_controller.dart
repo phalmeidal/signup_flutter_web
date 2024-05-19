@@ -28,6 +28,7 @@ class StepOneController extends GetxController {
     nomeFantasiaController.addListener(_validateFields);
     atividadePrincipalController.addListener(_validateFields);
     codigoExternoController.addListener(_validateFields);
+    _validateFields();
   }
 
   void _validateFields() {
@@ -37,7 +38,13 @@ class StepOneController extends GetxController {
     atividadePrincipal.value = atividadePrincipalController.text;
     codigoExterno.value = codigoExternoController.text;
 
-    isButtonEnabled.value = cnpj.isNotEmpty && razaoSocial.isNotEmpty && nomeFantasia.isNotEmpty && atividadePrincipal.isNotEmpty && codigoExterno.isNotEmpty;
+    isButtonEnabled.value = cnpj.isNotEmpty &&
+        razaoSocial.isNotEmpty &&
+        nomeFantasia.isNotEmpty &&
+        atividadePrincipal.isNotEmpty &&
+        codigoExterno.isNotEmpty;
+    Get.find<SignupController>()
+        .isNextButtonStepOneEnabled(isButtonEnabled.value);
   }
 
   void nextStep() {
