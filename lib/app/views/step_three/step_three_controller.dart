@@ -17,6 +17,10 @@ class StepThreeController extends GetxController {
   var bairro = ''.obs;
   var complemento = ''.obs;
 
+  var filialSelection = 0.obs;
+  var kitSelection = 0.obs;
+  var faturamentoSelection = 0.obs;
+
   var isNextButtonEnabled = false.obs;
 
   @override
@@ -37,13 +41,24 @@ class StepThreeController extends GetxController {
     bairro.value = bairroController.text;
     complemento.value = complementoController.text;
 
-    isNextButtonEnabled.value = cep.isNotEmpty &&
-        logradouro.isNotEmpty &&
-        numero.isNotEmpty &&
-        bairro.isNotEmpty &&
-        complemento.isNotEmpty;
-    Get.find<SignupController>()
-        .isNextButtonStepThreeEnabled(isNextButtonEnabled.value);
+    isNextButtonEnabled.value = cep.isNotEmpty && logradouro.isNotEmpty && numero.isNotEmpty && bairro.isNotEmpty && complemento.isNotEmpty && filialSelection.value != 0 && kitSelection.value != 0 && faturamentoSelection.value != 0;
+
+    _signupController.isNextButtonStepThreeEnabled(isNextButtonEnabled.value);
+  }
+
+  void updateFilialSelection(int value) {
+    filialSelection.value = value;
+    _validateFields();
+  }
+
+  void updateKitSelection(int value) {
+    kitSelection.value = value;
+    _validateFields();
+  }
+
+  void updateFaturamentoSelection(int value) {
+    faturamentoSelection.value = value;
+    _validateFields();
   }
 
   void nextStep() {

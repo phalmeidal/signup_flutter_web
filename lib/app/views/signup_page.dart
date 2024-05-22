@@ -17,64 +17,60 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        onBack: () => controller.previousStep(),
-        onCancel: () => Get.back(),
-      ),
-      backgroundColor: const Color(0xFFF5F5F5),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 25),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: const Text(
-                  'Cadastro nova empresa',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+        appBar: CustomAppBar(
+          onBack: () => controller.previousStep(),
+          onCancel: () => Get.back(),
+        ),
+        backgroundColor: const Color(0xFFF5F5F5),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 25),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: const Text(
+                    'Cadastro nova empresa',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 15),
-              Obx(() {
-                return SignupProgress(
-                  currentStep: controller.currentStep.value + 1,
-                );
-              }),
-              const SizedBox(height: 10),
-              Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height,
-                    child: _buildStepPage(context),
-                  ),
-                  const NavigationButtons(),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
+                const SizedBox(height: 15),
+                Obx(() {
+                  return SignupProgress(
+                    currentStep: controller.currentStep.value + 1,
+                  );
+                }),
+                const SizedBox(height: 10),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: _buildStepPage(context),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: const NavigationButtons(),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
-  Widget _buildStepPage(context) {
-    return Obx(() {
-      final stepPages = {
-        0: StepOnePage(),
-        1: StepTwoPage(),
-        2: StepThreePage(),
-        3: StepFourPage(),
-      };
+  Widget _buildStepPage(BuildContext context) {
+    final stepPages = {
+      0: StepOnePage(),
+      1: StepTwoPage(),
+      2: StepThreePage(),
+      3: StepFourPage(),
+    };
 
-      return IndexedStack(
-        index: controller.currentStep.value,
-        children: stepPages.values.toList(),
-      );
+    return Obx(() {
+      return stepPages[controller.currentStep.value] ?? Container();
     });
   }
 }

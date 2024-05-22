@@ -13,12 +13,10 @@ class LoginPage extends StatelessWidget {
       body: Row(
         children: [
           Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.blue,
-              child: Image.asset('assets/login_image.png'),
-            ),
-          ),
+              flex: 1,
+              child: Container(
+                color: Colors.blue,
+              )),
           Expanded(
             flex: 1,
             child: SingleChildScrollView(
@@ -75,14 +73,12 @@ class LoginPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                           const Color.fromARGB(255, 12, 101, 173),
                         ),
-                        elevation: MaterialStateProperty.all(0),
-                        minimumSize:
-                            MaterialStateProperty.all(const Size(350, 50)),
-                        overlayColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.transparent),
+                        elevation: WidgetStateProperty.all(0),
+                        minimumSize: WidgetStateProperty.all(const Size(350, 50)),
+                        overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent),
                       ),
                       child: const Text(
                         'Entrar',
@@ -104,11 +100,9 @@ class LoginPage extends StatelessWidget {
                         );
                       },
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        overlayColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.transparent),
-                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: WidgetStateProperty.all(Colors.transparent),
+                        overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent),
+                        elevation: WidgetStateProperty.all(0),
                       ),
                       child: const Text(
                         'Esquci minha senha',
@@ -121,8 +115,7 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(
                       height: 90,
                     ),
-                    const Divider(
-                        color: Color.fromARGB(75, 0, 0, 0), indent: 10),
+                    const Divider(color: Color.fromARGB(75, 0, 0, 0), indent: 10),
                     const SizedBox(
                       height: 10,
                     ),
@@ -131,17 +124,11 @@ class LoginPage extends StatelessWidget {
                         Get.to(() => SignupPage());
                       },
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        minimumSize:
-                            MaterialStateProperty.all(const Size(350, 50)),
-                        overlayColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.transparent),
-                        side: MaterialStateBorderSide.resolveWith((states) =>
-                            const BorderSide(
-                                color: Color.fromARGB(255, 12, 101, 173),
-                                width: 1)),
-                        elevation: MaterialStateProperty.all(0),
+                        backgroundColor: WidgetStateProperty.all(Colors.transparent),
+                        minimumSize: WidgetStateProperty.all(const Size(350, 50)),
+                        overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent),
+                        side: WidgetStateProperty.resolveWith((states) => const BorderSide(color: Color.fromARGB(255, 12, 101, 173), width: 1)),
+                        elevation: WidgetStateProperty.all(0),
                       ),
                       child: const Text(
                         'Cadastrar nova empresa',

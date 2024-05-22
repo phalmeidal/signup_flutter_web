@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_up_page/app/views/login_page.dart';
-import 'package:sign_up_page/app/views/signup_page.dart';
 
 class SuccessSignupDialog extends StatelessWidget {
   const SuccessSignupDialog({super.key});
@@ -10,11 +9,13 @@ class SuccessSignupDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       surfaceTintColor: Colors.white,
+      backgroundColor: Colors.white,
       child: SizedBox(
         width: 450,
         height: 450,
         child: AlertDialog(
           surfaceTintColor: Colors.white,
+          backgroundColor: Colors.white,
           content: Align(
             alignment: Alignment.topCenter,
             child: Column(
@@ -35,6 +36,9 @@ class SuccessSignupDialog extends StatelessWidget {
                   'Empresa cadastrada com sucesso!',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
                 const Text(
                   'Acesse sua conta e comece a melhorar a experiencia de gerenciamento da sua empresa',
                   textAlign: TextAlign.center,
@@ -46,15 +50,15 @@ class SuccessSignupDialog extends StatelessWidget {
             Center(
               child: TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                     const Color.fromARGB(255, 12, 101, 173),
                   ),
-                  elevation: MaterialStateProperty.all(0),
-                  minimumSize: MaterialStateProperty.all(const Size(350, 50)),
-                  overlayColor: MaterialStateColor.resolveWith((states) => Colors.transparent),
+                  elevation: WidgetStateProperty.all(0),
+                  minimumSize: WidgetStateProperty.all(const Size(350, 50)),
+                  overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent),
                 ),
                 onPressed: () {
-                  Get.to(const LoginPage());
+                  Get.to(() => const LoginPage());
                 },
                 child: const Text(
                   'Ir para login',

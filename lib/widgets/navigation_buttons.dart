@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sign_up_page/app/controllers/signup_controller.dart';
 import 'package:sign_up_page/widgets/button_previous.dart';
 import 'package:sign_up_page/widgets/custom_buttom.dart';
+import 'package:sign_up_page/widgets/success_signup_dialog.dart';
 
 class NavigationButtons extends StatelessWidget {
   const NavigationButtons({super.key});
@@ -32,7 +33,7 @@ class NavigationButtons extends StatelessWidget {
       }
 
       return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           if (controller.currentStep.value > 0)
             PreviousButton(
@@ -45,7 +46,12 @@ class NavigationButtons extends StatelessWidget {
             customIcon: Icons.arrow_forward,
             onPressed: controller.currentStep > 2
                 ? () {
-                    // Lógica do step 4
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const SuccessSignupDialog();
+                      },
+                    );
                   }
                 : controller.nextStep,
             isEnabled: isNextButtonEnabled,

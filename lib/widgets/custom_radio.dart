@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CustomRadio extends StatefulWidget {
   final String title, description, radioTitle1, radioTitle2;
   final String? radioDescription1, radioDescription2;
+  final ValueChanged<int> onChanged;
+  final int initialValue;
 
   const CustomRadio({
     super.key,
@@ -10,20 +12,29 @@ class CustomRadio extends StatefulWidget {
     required this.description,
     required this.radioTitle1,
     required this.radioTitle2,
+    required this.onChanged,
+    required this.initialValue,
     this.radioDescription1,
     this.radioDescription2,
   });
 
   @override
-  _CustomRadioState createState() => _CustomRadioState();
+  CustomRadioState createState() => CustomRadioState();
 }
 
-class _CustomRadioState extends State<CustomRadio> {
-  int _selectedRadio = 0;
+class CustomRadioState extends State<CustomRadio> {
+  late int _selectedRadio;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedRadio = widget.initialValue;
+  }
 
   void _setSelectedRadio(int val) {
     setState(() {
       _selectedRadio = val;
+      widget.onChanged(val);
     });
   }
 
@@ -110,7 +121,7 @@ class _CustomRadioState extends State<CustomRadio> {
                       Radio(
                         value: value,
                         activeColor: Colors.blue,
-                        overlayColor: MaterialStateProperty.all<Color>(Colors.white),
+                        overlayColor: WidgetStateProperty.all<Color>(Colors.white),
                         groupValue: _selectedRadio,
                         onChanged: (val) {
                           _setSelectedRadio(val!);

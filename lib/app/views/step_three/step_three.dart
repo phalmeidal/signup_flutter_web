@@ -7,29 +7,28 @@ import 'package:sign_up_page/widgets/custom_radio.dart';
 import 'package:sign_up_page/widgets/custom_text_form_field.dart';
 
 class StepThreePage extends StatelessWidget {
-  final StepThreeController _stepThreeController =
-      Get.put(StepThreeController());
+  final StepThreeController _stepThreeController = Get.put(StepThreeController());
 
   final bool? entregarCorrespondencia;
   final bool? usarOutroEndereco;
 
-  StepThreePage(
-      {super.key, this.entregarCorrespondencia, this.usarOutroEndereco});
+  StepThreePage({super.key, this.entregarCorrespondencia, this.usarOutroEndereco});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-      body: Center(
-          child: Column(
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
         children: [
           Card(
             surfaceTintColor: Colors.white,
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
             child: Container(
               decoration: BoxDecoration(
+                color: Colors.white,
                 border: Border.all(
                   color: const Color.fromARGB(75, 0, 0, 0),
                   width: 0.5,
@@ -53,7 +52,9 @@ class StepThreePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       const Divider(
-                          color: Color.fromARGB(75, 0, 0, 0), indent: 10),
+                        color: Color.fromARGB(75, 0, 0, 0),
+                        indent: 10,
+                      ),
                       const SizedBox(height: 10),
                       Row(
                         children: [
@@ -64,10 +65,9 @@ class StepThreePage extends StatelessWidget {
                               children: [
                                 CustomTextFormField(
                                   fieldName: 'CEP',
-                                  optionalText: 'Digite apenas numeros',
+                                  optionalText: 'Digite apenas números',
                                   placeholder: 'Digite o CEP da sua empresa',
-                                  controller:
-                                      _stepThreeController.cepController,
+                                  controller: _stepThreeController.cepController,
                                 ),
                               ],
                             ),
@@ -81,8 +81,7 @@ class StepThreePage extends StatelessWidget {
                                 CustomTextFormField(
                                   fieldName: 'Logradouro',
                                   placeholder: 'Rua, avenida, loteamento',
-                                  controller:
-                                      _stepThreeController.logradouroController,
+                                  controller: _stepThreeController.logradouroController,
                                 ),
                               ],
                             ),
@@ -96,8 +95,7 @@ class StepThreePage extends StatelessWidget {
                                 CustomTextFormField(
                                   fieldName: 'Número',
                                   placeholder: 'Ex: 143',
-                                  controller:
-                                      _stepThreeController.numeroController,
+                                  controller: _stepThreeController.numeroController,
                                 ),
                               ],
                             ),
@@ -107,31 +105,28 @@ class StepThreePage extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextFormField(
                                   fieldName: 'Bairro',
                                   placeholder: 'Digite o bairro da sua empresa',
-                                  controller:
-                                      _stepThreeController.bairroController,
+                                  controller: _stepThreeController.bairroController,
                                 ),
                               ],
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextFormField(
                                   fieldName: 'Complemento',
-                                  placeholder:
-                                      'Ex: Próximo a padaria do Seu João',
-                                  controller: _stepThreeController
-                                      .complementoController,
+                                  placeholder: 'Ex: Próximo à padaria do Seu João',
+                                  controller: _stepThreeController.complementoController,
                                 ),
                               ],
                             ),
@@ -181,30 +176,39 @@ class StepThreePage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      const CustomRadio(
+                      CustomRadio(
                         title: 'Filiais',
-                        description: 'A empressa possui outras',
+                        description: 'A empresa possui outras filiais?',
                         radioTitle1: 'Não',
                         radioDescription1: 'Não possui filiais',
                         radioTitle2: 'Sim',
                         radioDescription2: 'E quero fazer a gestão delas',
+                        initialValue: _stepThreeController.filialSelection.value,
+                        onChanged: (value) {
+                          _stepThreeController.updateFilialSelection(value);
+                        },
                       ),
-                      const CustomRadio(
+                      CustomRadio(
                         title: 'Kits e correspondências',
-                        description:
-                            'Para qual endereço devemos enviar os kits e correspondência?',
+                        description: 'Para qual endereço devemos enviar os kits e correspondência?',
                         radioTitle1: 'Enviar para o endereço cadastrado',
-                        radioTitle2: 'Enviar para o endereço das viliais',
+                        radioTitle2: 'Enviar para o endereço das filiais',
+                        initialValue: _stepThreeController.kitSelection.value,
+                        onChanged: (value) {
+                          _stepThreeController.updateKitSelection(value);
+                        },
                       ),
-                      const CustomRadio(
+                      CustomRadio(
                         title: 'Faturamento',
                         description: 'Por onde será feito o faturamento?',
                         radioTitle1: 'Por empresa',
-                        radioDescription1:
-                            'Cobrança de todas as filiais em uma fatura só',
+                        radioDescription1: 'Cobrança de todas as filiais em uma fatura só',
                         radioTitle2: 'Por filial',
-                        radioDescription2:
-                            'Cobrança das filiais por faturas individuais',
+                        radioDescription2: 'Cobrança das filiais por faturas individuais',
+                        initialValue: _stepThreeController.faturamentoSelection.value,
+                        onChanged: (value) {
+                          _stepThreeController.updateFaturamentoSelection(value);
+                        },
                       ),
                     ],
                   ),
@@ -213,7 +217,7 @@ class StepThreePage extends StatelessWidget {
             ),
           ),
         ],
-      )),
+      ),
     );
   }
 }

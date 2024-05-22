@@ -7,6 +7,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? placeholder;
   final bool isPassword;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final FocusNode? nextFocusNode;
 
   final RxBool _obscureText;
   CustomTextFormField({
@@ -16,8 +18,11 @@ class CustomTextFormField extends StatelessWidget {
     this.placeholder,
     this.isPassword = false,
     this.controller,
+    this.focusNode,
+    this.nextFocusNode,
   })  : _obscureText = (isPassword ? true.obs : false.obs),
         super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,6 +44,15 @@ class CustomTextFormField extends StatelessWidget {
                   controller: controller,
                   obscureText: _obscureText.value,
                   cursorColor: const Color.fromARGB(255, 12, 101, 173),
+                  focusNode: focusNode,
+                  textInputAction: nextFocusNode != null ? TextInputAction.next : TextInputAction.done,
+                  onFieldSubmitted: (_) {
+                    if (nextFocusNode != null) {
+                      FocusScope.of(context).requestFocus(nextFocusNode);
+                    } else {
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: const Color.fromARGB(120, 238, 238, 238),
